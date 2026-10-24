@@ -7,3 +7,15 @@ __pycache__/
 data/raw/
 data/processed/
 results/
+
+# Python builds, editable installs, and development tools
+*.egg-info/
+build/
+dist/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.log
+# Generated figures and experiment outputs (curated reports belong in docs/)
+figures/generated/

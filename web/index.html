@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="An interactive laboratory for structural logic, scientific models, and reproducible mathematical exploration."
+    />
+    <title>Python Research Laboratory</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="#structures"
+        ><span class="mark">01</span> RESEARCH LABORATORY</a
+      ><span class="tag">Independent research · v0.1</span>
+    </header>
+    <div class="shell">
+      <aside>
+        <p class="eyebrow">YOUR LABORATORY</p>
+        <nav aria-label="Research modules">
+          <a href="#structures" data-tab="structures"
+            ><span aria-hidden="true" class="nav-icon">01</span>Structural
+            logic</a
+          >
+          <a href="#physics" data-tab="physics"
+            ><span aria-hidden="true" class="nav-icon">~</span>Classical
+            physics</a
+          >
+          <a href="#information" data-tab="information"
+            ><span aria-hidden="true" class="nav-icon">H</span>Information
+            theory</a
+          >
+          <a href="#notes" data-tab="notes"
+            ><span aria-hidden="true" class="nav-icon">=</span>Research notes</a
+          >
+        </nav>
+        <div class="aside-note">
+          <span class="status-dot"></span> Runs in your browser
+          <p>
+            No Python installation needed. Structural results come from the
+            Python research engine.
+          </p>
+        </div>
+      </aside>
+      <main>
+        <section id="structures" class="panel">
+          <div class="page-heading">
+            <p class="eyebrow">EXPERIMENT 001 / DISCRETE STRUCTURES</p>
+            <h1>From distinction<br />to structure.</h1>
+            <p class="intro">
+              Explore your original binary sequences, follow their development,
+              and compare explicit interpretations of the transformation rule.
+            </p>
+          </div>
+          <div class="notice">
+            CANDIDATE MODEL
+            <span
+              >These rules are formal interpretations of your examples. They do
+              not establish a physical theory.</span
+            >
+          </div>
+          <form id="controls" class="controls">
+            <label
+              >Transformation rule<select id="rule">
+                <option value="zero_split">
+                  Zero splitting · fits original examples
+                </option>
+                <option value="zero_occupancy">
+                  Literal occupancy · alternative
+                </option>
+                <option value="dyck_insertion">
+                  Dyck insertion · alternative
+                </option>
+              </select></label
+            ><label
+              >Generation <output id="generation-value">3</output
+              ><input
+                id="generation"
+                type="range"
+                min="0"
+                max="6"
+                value="3" /></label
+            ><label
+              >Stabilization · maximum tree depth<select id="depth">
+                <option value="none">Unconstrained</option>
+                <option value="0">0 edges</option>
+                <option value="1">1 edge</option>
+                <option value="2">2 edges</option>
+                <option value="3">3 edges</option>
+                <option value="4">4 edges</option>
+                <option value="5">5 edges</option>
+              </select></label
+            ><button type="button" id="export">Export generation JSON ↓</button>
+          </form>
+          <div class="view-actions">
+            <button type="button" id="play" class="secondary">
+              ▶ Play generations</button
+            ><button type="button" id="share" class="secondary">
+              Copy view link ↗</button
+            ><button type="button" id="reset" class="text-button">
+              Reset view</button
+            ><span id="loading" role="status"
+              >Loading Python-engine results…</span
+            >
+          </div>
+          <p id="rule-description" class="muted"></p>
+          <div id="error" role="alert" hidden></div>
+          <div class="stats">
+            <div>
+              <span>Distinct states</span><strong id="state-count">—</strong>
+            </div>
+            <div>
+              <span>Distinctions per state</span
+              ><strong id="distinction-count">—</strong>
+            </div>
+            <div>
+              <span>Candidate count C(n−1)</span
+              ><strong id="catalan-count">—</strong>
+            </div>
+            <div>
+              <span>Standard Dyck count C(n)</span
+              ><strong id="dyck-count">—</strong>
+            </div>
+          </div>
+          <p id="count-context" class="footnote"></p>
+          <div class="card">
+            <div class="card-heading">
+              <div>
+                <p class="eyebrow">FOLLOW THE TRANSFORMATIONS</p>
+                <h2>Generation history</h2>
+              </div>
+              <span class="pill">Select a state to inspect it</span>
+            </div>
+            <div
+              id="history"
+              class="history"
+              aria-label="Generation history"
+            ></div>
+          </div>
+          <div class="details">
+            <div class="card">
+              <p class="eyebrow">SELECTED STATE</p>
+              <h2 id="selected-word">—</h2>
+              <p id="notation" class="notation"></p>
+              <label
+                >State at this generation<select id="state"></select
+              ></label>
+              <dl id="metrics"></dl>
+            </div>
+            <div class="card">
+              <p class="eyebrow">ORDERED TREE REPRESENTATION</p>
+              <div id="tree"></div>
+              <p id="tree-note" class="muted"></p>
+            </div>
+          </div>
+          <div class="card">
+            <p class="eyebrow">COMPARE THE CANDIDATE RULES</p>
+            <h2>Same starting point. Different futures.</h2>
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Generation</th>
+                    <th>Zero splitting</th>
+                    <th>Literal occupancy</th>
+                    <th>Dyck insertion</th>
+                  </tr>
+                </thead>
+                <tbody id="comparison-body"></tbody>
+              </table>
+            </div>
+            <p class="footnote">
+              Unconstrained state counts; the depth constraint above affects the
+              selected exploration only.
+            </p>
+          </div>
+          <p class="footnote">
+            Enumeration is bounded at generation 6 to keep exploration
+            responsive. Counts describe states, not the number or probability of
+            histories. Marginal symbol entropy ignores order.
+          </p>
+        </section>
+        <section id="physics" class="panel" hidden>
+          <div class="page-heading">
+            <p class="eyebrow">ESTABLISHED MODEL / CLASSICAL MECHANICS</p>
+            <h1>The harmonic<br />oscillator.</h1>
+            <p class="intro">
+              An ideal undamped oscillator: x″ = −ω²x. Explore its exact
+              solution and conserved energy in SI units.
+            </p>
+          </div>
+          <div class="controls">
+            <label
+              >Angular frequency ω (rad/s)<input
+                id="omega"
+                type="range"
+                min="0.2"
+                max="3"
+                step="0.1"
+                value="1"
+              /><output id="omega-value">1</output></label
+            ><label
+              >Initial displacement (m)<input
+                id="amplitude"
+                type="range"
+                min="0.2"
+                max="3"
+                step="0.1"
+                value="1"
+              /><output id="amplitude-value">1</output></label
+            >
+          </div>
+          <div class="card">
+            <div class="card-heading">
+              <h2>Live oscillator</h2>
+              <button id="motion-toggle" type="button" class="secondary">
+                Ⅱ Pause motion
+              </button>
+            </div>
+            <svg viewBox="0 0 500 100" aria-label="Animated oscillator">
+              <line
+                id="spring"
+                x1="30"
+                y1="42"
+                x2="250"
+                y2="42"
+                stroke="#9cb089"
+                stroke-width="3"
+              />
+              <line
+                x1="30"
+                y1="15"
+                x2="30"
+                y2="70"
+                stroke="#9cb089"
+                stroke-width="5"
+              />
+              <circle id="mass" cx="250" cy="42" r="18" fill="#c5ec7f" />
+            </svg>
+            <p id="motion-time" class="muted"></p>
+          </div>
+          <div class="card">
+            <h2>Position over 10 seconds</h2>
+            <div id="oscillator"></div>
+            <p id="energy"></p>
+          </div>
+          <p class="footnote">
+            Initial velocity 0 m/s; mass 1 kg. This exact idealized model
+            includes no damping, forcing, or experimental measurement.
+          </p>
+        </section>
+        <section id="information" class="panel" hidden>
+          <div class="page-heading">
+            <p class="eyebrow">INFORMATION THEORY / BERNOULLI DISTRIBUTION</p>
+            <h1>Measure<br />uncertainty.</h1>
+            <p class="intro">
+              Binary Shannon entropy describes uncertainty in one Bernoulli
+              outcome: H(p) = −p log₂p − (1−p) log₂(1−p).
+            </p>
+          </div>
+          <div class="controls">
+            <label
+              >Probability of 1<input
+                id="probability"
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value="0.5"
+              /><output id="probability-value">0.50</output></label
+            >
+          </div>
+          <div class="probability-bar">
+            <div id="prob-zero"></div>
+            <div id="prob-one"></div>
+          </div>
+          <p id="prob-label" class="muted"></p>
+          <div class="card">
+            <h2 id="entropy-value">1.0000 bits</h2>
+            <div id="entropy-chart"></div>
+          </div>
+          <p class="footnote">
+            This is entropy of a specified distribution. Symbol entropy does not
+            measure tree shape, algorithmic complexity, or physical emergence.
+          </p>
+        </section>
+        <section id="notes" class="panel" hidden>
+          <div class="page-heading">
+            <p class="eyebrow">RESEARCH RECORD / DEFINITIONS & LIMITATIONS</p>
+            <h1>Keep the claims<br />precise.</h1>
+          </div>
+          <div class="card prose">
+            <h2>Your original correspondences</h2>
+            <pre>
+0       ↔ x
+10      ↔ (x)
+1100    ↔ ((x)x)
+111000  ↔ (((x)x)x)
+110100  ↔ ((x)(x)x)</pre
+            >
+            <h2>Definition · zero-split candidate</h2>
+            <p>
+              The seed step is 0 → 10. Every subsequent step selects an existing
+              0 and replaces it by 100. The seed convention is explicit because
+              using 0 → 100 at the initial step would give a different first
+              example.
+            </p>
+            <h2>Theorem · under this definition</h2>
+            <p>
+              At positive generation n, the reachable words are exactly
+              primitive Dyck words with n pairs, equivalent to rooted ordered
+              trees with n nodes. Their count is C(n−1).
+            </p>
+            <p>
+              Encode a node as 1, followed by its ordered children, followed by
+              0. Replacing a closing 0 by 100 appends a last-child leaf.
+              Conversely, a deepest parent of leaves has a removable last-child
+              leaf, so induction reaches every ordered tree. Removing the
+              exterior pair gives a bijection to ordinary Dyck words with n−1
+              pairs.
+            </p>
+            <h2>Ambiguity · several rules are possible</h2>
+            <p>
+              Literal replacement 0 → 10 gives 0 → 10 → 110, not 1100. Full Dyck
+              insertion includes 1010 at generation 2. The examples alone do not
+              determine an exhaustive state space or a probability law.
+            </p>
+            <h2>Hypothesis · physical emergence</h2>
+            <blockquote>
+              “Reality is a phenomenon that arises when stabilization constrains
+              instability, allowing emergent rules to shape the formation of the
+              universe.”
+            </blockquote>
+            <p>
+              The combinatorial result does not validate that physical
+              interpretation. A physical theory would require observables,
+              units, dynamics, measurable predictions, and independent evidence.
+            </p>
+            <h2>About this interface</h2>
+            <p>
+              This browser interface explores bounded Python-engine results and
+              two established mathematical demonstrations. The full Python
+              toolkit and notebooks remain in the repository. It does not
+              execute arbitrary Python in your browser.
+            </p>
+          </div>
+        </section>
+        <footer>
+          PYTHON RESEARCH LABORATORY
+          <span>Definitions first. Evidence always.</span>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

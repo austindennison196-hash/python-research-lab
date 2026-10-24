@@ -1,0 +1,10 @@
+{
+  "name": "structural-growth",
+  "parameters": {
+    "max_generation": 5,
+    "rules": ["zero_split", "zero_occupancy", "dyck_insertion"],
+    "max_states": 10000,
+    "visualize": true
+  },
+  "seed": 0
+}
