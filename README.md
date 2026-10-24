@@ -1,5 +1,7 @@
 # Python Research Laboratory
 
+**[Open the Research Laboratory app](https://austindennison196-hash.github.io/python-research-lab/)** — runs in your browser; no installation needed.
+
 A modular laboratory for formal structural models, reproducible experiments, mathematics, introductory physics, and scientific visualization. Its first research program preserves the originator's binary and parentheses examples and compares explicitly labeled transformation rules without assuming that they are equivalent or physically established.
 
 ```text
@@ -11,7 +13,7 @@ The core package has no mandatory third-party dependencies. Large scientific lib
 
 ## Browser interface
 
-The interactive browser app includes structural state exploration, generation playback, tree inspection, rule comparisons, depth constraints, an animated oscillator, and a binary-entropy explorer. Visitors need no Python installation. See [browser features and hosting](docs/browser_app.md). The interface is built; a public address requires successful hosting deployment.
+The interactive browser app includes structural state exploration, generation playback, tree inspection, rule comparisons, depth constraints, an animated oscillator, and a binary-entropy explorer. Visitors need no Python installation. See [browser features and hosting](docs/browser_app.md). The app is published on GitHub Pages at the link above.
 
 ## Start in Codex or another cloud machine
 

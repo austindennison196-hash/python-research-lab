@@ -29,6 +29,8 @@ The output is `dist/site/`. It is suitable for a static host and uses relative a
 
 ## Hosting
 
+The live app is available at https://austindennison196-hash.github.io/python-research-lab/. The deployment succeeded in [workflow run 40047630792](https://github.com/austindennison196-hash/python-research-lab/actions/runs/40047630792), and the public page and structural dataset returned HTTP 200.
+
 The `Publish browser laboratory` workflow builds and deploys GitHub Pages when changes reach `main`, or when it is manually run. In the repository's **Settings → Pages**, the source must be **GitHub Actions**. Enabling Pages can require repository-administrator access and is subject to the account's plan and repository visibility. A public site exposes the app and its research notes; publication must be deliberate.
 
 Saving a cloud environment or starting a server inside its private workspace does not publish this site. A deployment is only live after the host reports success and its public URL is checked. Do not describe an unverified URL or an internal server address as a working app link.
